@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Up 4 Exercises: Prepositions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans JP', 'Inter', sans-serif; }
+        .en-font { font-family: 'Times New Roman', Times, serif !important; }
+        .jp-font { font-family: 'Noto Serif JP', serif !important; }
+        .control-button:hover { transform: scale(1.1); transition: transform 0.2s; }
+        .highlight { color: #16A34A; font-weight: bold; }
+        .recording { animation: pulse 1.5s infinite; }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .input-full {
+            width: 100%; padding: 1.2rem; border: 2px solid #e5e7eb; border-radius: 0.5rem;
+            margin-top: 0.5rem; font-size: 1.6rem; transition: all 0.2s;
+            line-height: 1.4; display: block; resize: vertical;
+        }
+        .input-full:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); }
+        .input-full.correct { border-color: #16a34a; background-color: #f0fdf4; }
+        .input-full.incorrect { border-color: #dc2626; background-color: #fef2f2; }
+        .option-btn {
+            display: block; width: 100%; text-align: left; padding: 1rem; margin-bottom: 0.5rem;
+            background-color: #ffffff; border-radius: 0.5rem; font-size: 1.4rem; font-weight: 500;
+            border: 2px solid #e5e7eb; transition: all 0.2s; cursor: pointer;
+        }
+        .option-btn:hover:not(:disabled) { background-color: #f8fafc; border-color: #cbd5e1; }
+        .option-btn.correct { background-color: #dcfce7 !important; border-color: #16a34a !important; color: #14532d !important; }
+        .option-btn.incorrect { background-color: #fee2e2 !important; border-color: #dc2626 !important; color: #7f1d1d !important; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-4xl">
+        <header class="text-center mb-10">
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-800">Build Up 4 Exercises</h1>
+            <p class="text-slate-600 mt-2 text-lg">前置詞 (Prepositions)</p>
+        </header>
+
+        <main class="space-y-12" id="main-content">
+            <section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-200">
+                <h2 class="text-2xl font-bold text-blue-700 border-l-4 border-blue-500 pl-4 mb-6">1. 適切な語句の選択</h2>
+                <div id="sentences-1" class="space-y-8"></div>
+            </section>
+
+            <section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-200">
+                <h2 class="text-2xl font-bold text-green-700 border-l-4 border-green-500 pl-4 mb-6">2. 適切な語句の補充</h2>
+                <div id="sentences-2" class="space-y-8"></div>
+            </section>
+
+            <section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-200">
+                <h2 class="text-2xl font-bold text-amber-700 border-l-4 border-amber-500 pl-4 mb-6">3. 語句整序</h2>
+                <div id="sentences-3" class="space-y-8"></div>
+            </section>
+
+            <section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-200">
+                <h2 class="text-2xl font-bold text-purple-700 border-l-4 border-purple-500 pl-4 mb-6">4. 和文英訳</h2>
+                <div id="sentences-4" class="space-y-8"></div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const sentences = [
+            // Section 1: Multiple Choice
+            {
+                id: 1, category: '1',
+                q: "( &emsp; ) the heavy traffic, I got to the office in time for the meeting.",
+                en: "In spite of the heavy traffic, I got to the office in time for the meeting.",
+                jp: "交通渋滞にもかかわらず、会議に間に合うように会社に着いた。",
+                options: ["a. Due to", "b. In addition to", "c. In spite of", "d. Instead of"],
+                answer: "c. In spite of",
+                explanation: "逆接の内容なので in spite of ~「~にもかかわらず」を使う。due to ~ は「~のために」、in addition to ~ は「~に加えて」、instead of は「~の代わりに」。"
+            },
+            {
+                id: 2, category: '1',
+                q: "Mike doesn't look well. I'm really concerned ( &emsp; ) his health.",
+                en: "Mike doesn't look well. I'm really concerned about his health.",
+                jp: "マイクは体調が良くなさそうだ。私は彼の健康を本当に心配している。",
+                options: ["a. about", "b. on", "c. of", "d. in"],
+                answer: "a. about",
+                explanation: "be concerned about ~ で「~を心配している」の意味。be worried about ~ と同じ意味を表す。"
+            },
+            {
+                id: 3, category: '1',
+                q: "We hope to see a couple of shows ( &emsp; ) our stay in New York City.",
+                en: "We hope to see a couple of shows during our stay in New York City.",
+                jp: "ニューヨーク市に滞在中、私たちは2、3のショーを見たい。",
+                options: ["a. for", "b. during", "c. by", "d. while"],
+                answer: "b. during",
+                explanation: "during は前置詞で「(特定の期間)の間に」を表す。while は接続詞なので、後にS+Vをとる。"
+            },
+            {
+                id: 4, category: '1',
+                q: "World War I began in 1914 and lasted ( &emsp; ) 1918.",
+                en: "World War I began in 1914 and lasted until 1918.",
+                jp: "第一次世界大戦は1914年に始まり、1918年まで続いた。",
+                options: ["a. by", "b. for", "c. in", "d. until"],
+                answer: "d. until",
+                explanation: "last は「続く」を意味する自動詞なので、継続の終了点を表す until「〜まで(ずっと)」を選ぶ。by は「〜までに」という期限。"
+            },
+            {
+                id: 5, category: '1',
+                q: "The team's star player broke his leg and won't be able to play soccer ( &emsp; ) three months.",
+                en: "The team's star player broke his leg and won't be able to play soccer for three months.",
+                jp: "そのチームのスター選手は脚を骨折したので、3か月間サッカーができないだろう。",
+                options: ["a. during", "b. for", "c. until", "d. by"],
+                answer: "b. for",
+                explanation: "数字を伴った期間(three months)から、継続する期間を表す for「~の間」を選ぶ。during は休暇のような特定の期間。"
+            },
+            {
+                id: 6, category: '1',
+                q: "Anna came back from Japan ( &emsp; ) the morning of January 7.",
+                en: "Anna came back from Japan on the morning of January 7.",
+                jp: "アンナは1月7日の朝、日本から戻って来た。",
+                options: ["a. at", "b. on", "c. since", "d. until"],
+                answer: "b. on",
+                explanation: "on は曜日や日付、ある特定の決まった日時を表す場合に使用する。"
+            },
+            {
+                id: 7, category: '1',
+                q: "Is it possible for you to postpone today's meeting ( &emsp; ) next Wednesday?",
+                en: "Is it possible for you to postpone today's meeting until next Wednesday?",
+                jp: "今日の会議を来週水曜日まで延期していただくことは可能ですか。",
+                options: ["a. by", "b. in", "c. on", "d. until"],
+                answer: "d. until",
+                explanation: "until ~「~まで(ずっと)」はある時点までの継続の終了点を表す。"
+            },
+            {
+                id: 8, category: '1',
+                q: "Tom went there by car ( &emsp; ) by train.",
+                en: "Tom went there by car instead of by train.",
+                jp: "トムは電車の代わりに車でそこに行った。",
+                options: ["a. instead of", "b. with a view to", "c. in order to", "d. on account of"],
+                answer: "a. instead of",
+                explanation: "「~の代わりに」は instead of ~ で表す。with a view to 「〜する目的で」、on account of 「〜の理由で」。"
+            },
+            {
+                id: 9, category: '1',
+                q: "The court will decide the extent ( &emsp; ) Mr. Suzuki is responsible for the livelihood of his former wife.",
+                en: "The court will decide the extent to which Mr. Suzuki is responsible for the livelihood of his former wife.",
+                jp: "鈴木氏が前妻の生活にどの程度の責任を負うかについて、裁判所が決定を下すだろう。",
+                options: ["a. at which", "b. of which", "c. in which", "d. to which"],
+                answer: "d. to which",
+                explanation: "extent「範囲、程度」との組み合わせでよく使うのは to「〜まで」。the extent to which S+V で「どの程度〜か」。"
+            },
+            {
+                id: 10, category: '1',
+                q: "I failed math ( &emsp; ) science.",
+                en: "I failed math in addition to science.",
+                jp: "科学に加えて数学も不合格だった。",
+                options: ["a. in terms of", "b. in charge of", "c. on behalf of", "d. in addition to"],
+                answer: "d. in addition to",
+                explanation: "「~に加えて」は in addition to ~ で表す。in terms of 「〜の点で」、on behalf of 「〜を代表して」。"
+            },
+            {
+                id: 11, category: '1',
+                q: "Mary was supposed to send an e-mail to her boss ( &emsp; ) midnight, but she must have forgotten.",
+                en: "Mary was supposed to send an e-mail to her boss by midnight, but she must have forgotten.",
+                jp: "メアリーは真夜中までに上司にメールを送ることになっていたが、忘れてしまったに違いない。",
+                options: ["a. by", "b. for", "c. in", "d. until"],
+                answer: "a. by",
+                explanation: "動作の期限・締め切りは by「〜までに」で表す。until は継続を表す。"
+            },
+            {
+                id: 12, category: '1',
+                q: "I ran ( &emsp; ) my English teacher at the shopping mall yesterday.",
+                en: "I ran across my English teacher at the shopping mall yesterday.",
+                jp: "昨日、ショッピングセンターで私の英語の先生に偶然出会った。",
+                options: ["a. of", "b. out", "c. away", "d. across"],
+                answer: "d. across",
+                explanation: "run across [run into / come across] 「~に偶然出会う」の意味。run out of 「〜を使い果たす」。"
+            },
+            {
+                id: 13, category: '1',
+                q: "Because of rain, our excursion to Mount Aoba was ( &emsp; ) until next month.",
+                en: "Because of rain, our excursion to Mount Aoba was put off until next month.",
+                jp: "雨のために、青葉山への遠足は来月まで延期になった。",
+                options: ["a. put away", "b. put off", "c. called up", "d. looked after"],
+                answer: "b. put off",
+                explanation: "put off ~「~を延期する」を選ぶ。put away 「~を片付ける」、look after 「~の世話をする」。"
+            },
+            {
+                id: 14, category: '1',
+                q: "I went to the restaurant, ( &emsp; ) its bad reputation, because it was so cheap.",
+                en: "I went to the restaurant, in spite of its bad reputation, because it was so cheap.",
+                jp: "悪い評判にもかかわらず、とても安いのでそのレストランへ行った。",
+                options: ["a. by way of", "b. for want of", "c. in contrast to", "d. in spite of"],
+                answer: "d. in spite of",
+                explanation: "逆接の内容なので in spite of を使う。by way of 「〜経由で」、for want of 「〜の不足のため」。"
+            },
+            {
+                id: 15, category: '1',
+                q: "When planning your trip to a foreign country, you need to ( &emsp; ) safety into account.",
+                en: "When planning your trip to a foreign country, you need to take safety into account.",
+                jp: "外国への旅行を計画するときは、安全を考慮する必要がある。",
+                options: ["a. take", "b. look", "c. put", "d. see"],
+                answer: "a. take",
+                explanation: "take into account で「~を考慮する」の意味。"
+            },
+
+            // Section 2
+            {
+                id: 16, category: '2',
+                q: "I've succeeded in business <u>&emsp;&emsp;&emsp;&emsp;</u> your help.",
+                en: "I've succeeded in business thanks to your help.",
+                jp: "あなたの助けのおかげで、私は仕事に成功した。",
+                answer: "thanks to",
+                explanation: "「~のおかげで」は群前置詞 thanks to を用いる。"
+            },
+            {
+                id: 17, category: '2',
+                q: "Many people <u>&emsp;&emsp;&emsp;&emsp;</u> water.",
+                en: "Many people asked for water.",
+                jp: "水を求める人がたくさんいた。",
+                answer: "asked for",
+                explanation: "「~を求める」は群動詞 ask for で表す。"
+            },
+            {
+                id: 18, category: '2',
+                q: "I <u>&emsp;&emsp;&emsp;&emsp;</u> my host family.",
+                en: "I heard from my host family.",
+                jp: "ホストファミリーから便りがあった。",
+                answer: "heard from",
+                explanation: "「~から便りがある」は群動詞 hear from を用いる。"
+            },
+            {
+                id: 19, category: '2',
+                q: "<u>&emsp;&emsp;&emsp;&emsp;</u> a specialist, the weather is extreme this year.",
+                en: "According to a specialist, the weather is extreme this year.",
+                jp: "ある専門家によると、今年の天気は異常だ。",
+                answer: "according to",
+                explanation: "「~によると」は群前置詞 according to で表す。"
+            },
+
+            // Section 3
+            {
+                id: 20, category: '3',
+                q: "Average temperatures may increase <u>&emsp;&emsp;&emsp;&emsp;</u> decades.",
+                en: "Average temperatures may increase by 2.5 degrees over the next two decades.",
+                scrambled: "( 2.5 degrees / two / next / by / over / the )",
+                jp: "今後20年で平均気温が2.5度上昇するかもしれません。",
+                answer: "by 2.5 degrees over the next two",
+                explanation: "「2.5度(だけ)」と差を表す場合、(by + 数詞 + 単位) を使う。over は「〜の間に」を表す。"
+            },
+            {
+                id: 21, category: '3',
+                q: "You should read the newspaper <u>&emsp;&emsp;&emsp;&emsp;</u>.",
+                en: "You should read the newspaper to keep up with current events.",
+                scrambled: "( current / events / keep / to / up / with )",
+                jp: "時事問題に通じるために新聞を読むべきだ。",
+                answer: "to keep up with current events",
+                explanation: "「~に遅れずついて行く」は群動詞 keep up with で表す。"
+            },
+            {
+                id: 22, category: '3',
+                q: "I was looking for <u>&emsp;&emsp;&emsp;&emsp;</u>.",
+                en: "I was looking for something to open the bottle with.",
+                scrambled: "( bottle / something / with / to / the / open )",
+                jp: "瓶を開けるものを探していた。",
+                answer: "something to open the bottle with",
+                explanation: "道具を表す with「(道具)を使って」が必要。"
+            },
+            {
+                id: 23, category: '3',
+                q: "When hot materials cool down, they <u>&emsp;&emsp;&emsp;&emsp;</u> energy.",
+                en: "When hot materials cool down, they give off heat that can be used as energy.",
+                scrambled: "( as / can be / give / heat that / off / used )",
+                jp: "熱い物体が冷える時、エネルギーとして使える熱を放出する。",
+                answer: "give off heat that can be used as",
+                explanation: "「~を放出する」は群動詞 give off で表す。"
+            },
+
+            // Section 4
+            {
+                id: 24, category: '4',
+                en: "The teacher told us to hand in the paper by Monday.",
+                jp: "先生は私たちに月曜日までにレポートを提出するようにと言った。",
+                answer: "the teacher told us to hand in the paper by monday",
+                explanation: "hand in「〜を提出する」を用いる。「〜までに」は期限の by。"
+            },
+            {
+                id: 25, category: '4',
+                en: "The children kept playing until sunset.",
+                jp: "子どもたちは日没までずっと遊んだ。",
+                answer: "the children kept playing until sunset",
+                explanation: "「〜までずっと」は継続を表す until を用いる。"
+            },
+            {
+                id: 26, category: '4',
+                en: "He kept me waiting for half an hour.",
+                jp: "彼は私を30分待たせた。",
+                answer: "he kept me waiting for half an hour",
+                explanation: "継続する期間は for で表す。「30分」は half an hour または 30 minutes。"
+            },
+            {
+                id: 27, category: '4',
+                en: "GDP stands for gross domestic product.",
+                jp: "GDPは国内総生産を表している。",
+                answer: "gdp stands for gross domestic product",
+                explanation: "群動詞 stand for 「~を表す」を用いる。"
+            }
+        ];
+
+        // --- Application Logic ---
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognition;
+        let americanVoice = null;
+
+        function loadVoices() {
+            const voices = speechSynthesis.getVoices();
+            americanVoice = voices.find(v => v.name.includes('Google US English')) || voices.find(v => v.lang === 'en-US');
+        }
+        speechSynthesis.onvoiceschanged = loadVoices;
+        loadVoices();
+
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.lang = 'en-US';
+        }
+
+        function normalize(t) {
+            return t.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s+/g, ' ').trim();
+        }
+
+        function handleMic(text, btn, panel) {
+            if (!recognition) return;
+            if (btn.classList.contains('recording')) { recognition.stop(); return; }
+            recognition.start();
+            recognition.onstart = () => { btn.classList.add('recording', 'bg-red-500'); panel.innerHTML = "聴取中..."; };
+            recognition.onend = () => btn.classList.remove('recording', 'bg-red-500');
+            recognition.onresult = (e) => {
+                const transcript = e.results[0][0].transcript;
+                panel.innerHTML = `結果: 「${transcript}」`;
+            };
+        }
+
+        function createCard(s, idx) {
+            const card = document.createElement('div');
+            card.className = 'bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative';
+            
+            const header = document.createElement('div');
+            header.className = 'flex justify-between items-start mb-4';
+            header.innerHTML = `<span class="bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl">${idx}</span>`;
+            
+            const controls = document.createElement('div');
+            controls.className = 'flex space-x-2';
+            const speakBtn = document.createElement('button');
+            speakBtn.className = 'p-3 bg-blue-100 text-blue-600 rounded-lg control-button text-xl';
+            speakBtn.innerHTML = '🔊';
+            speakBtn.onclick = () => {
+                const u = new SpeechSynthesisUtterance(s.en);
+                if (americanVoice) u.voice = americanVoice;
+                speechSynthesis.speak(u);
+            };
+            const micBtn = document.createElement('button');
+            micBtn.className = 'p-3 bg-green-100 text-green-600 rounded-lg control-button text-xl';
+            micBtn.innerHTML = '🎤';
+            const micRes = document.createElement('div');
+            micRes.className = 'text-xs text-slate-400 mt-1';
+            micBtn.onclick = () => handleMic(s.en, micBtn, micRes);
+            
+            controls.append(speakBtn, micBtn);
+            header.appendChild(controls);
+
+            const body = document.createElement('div');
+            body.className = 'space-y-4';
+            
+            const qText = document.createElement('div');
+            qText.className = 'text-2xl text-slate-800 leading-relaxed en-font'; 
+            qText.innerHTML = s.q || "";
+
+            let input;
+            let feedback = document.createElement('div');
+            feedback.className = 'text-sm font-bold hidden py-2';
+            
+            const optButtons = [];
+
+            if (s.category === '1') {
+                const optContainer = document.createElement('div');
+                optContainer.className = 'grid grid-cols-1 gap-2 mt-4';
+                s.options.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn en-font';
+                    btn.textContent = opt;
+                    btn.onclick = () => {
+                        optButtons.forEach(b => b.classList.remove('correct', 'incorrect'));
+                        const isCorrect = opt === s.answer;
+                        btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+                        if (isCorrect) {
+                            qText.innerHTML = s.en.replace(s.answer.split('. ')[1], `<span class="highlight">${s.answer.split('. ')[1]}</span>`);
+                        }
+                    };
+                    optButtons.push(btn);
+                    optContainer.appendChild(btn);
+                });
+                body.append(qText, optContainer);
+            } else {
+                input = (s.category === '3' || s.category === '4') ? document.createElement('textarea') : document.createElement('input');
+                input.className = 'input-full en-font'; 
+                input.placeholder = '解答を入力';
+                if (s.category === '3' || s.category === '4') {
+                    input.rows = 2;
+                }
+                
+                const checkBtn = document.createElement('button');
+                checkBtn.className = 'mt-3 px-8 py-3 bg-slate-800 text-white rounded-lg font-bold text-lg hover:bg-slate-700 transition shadow-sm jp-font';
+                checkBtn.textContent = '答え合わせ';
+                
+                checkBtn.onclick = () => {
+                    const rawVal = input.value.trim();
+                    const user = normalize(rawVal);
+                    if (user === "") {
+                        feedback.innerHTML = '<span class="text-amber-600 text-xl jp-font">解答を入力してください。</span>';
+                        feedback.classList.remove('hidden');
+                        return;
+                    }
+                    const correct = normalize(s.answer);
+                    const fullEn = normalize(s.en);
+                    const isCorrect = (user === correct) || (user === fullEn) || (user.length > 5 && fullEn.includes(user));
+                    input.className = `input-full en-font ${isCorrect ? 'correct' : 'incorrect'}`;
+                    feedback.innerHTML = isCorrect ? '<span class="text-green-600 text-xl jp-font">正解です！</span>' : '<span class="text-red-600 text-xl jp-font">もう一度確認してみましょう。</span>';
+                    feedback.classList.remove('hidden');
+                };
+                
+                body.append(qText, input, checkBtn, feedback);
+            }
+
+            const jpText = document.createElement('p');
+            jpText.className = 'text-slate-600 text-2xl jp-font mt-2'; 
+            jpText.textContent = s.jp;
+            body.append(jpText);
+
+            if (s.scrambled) {
+                const scP = document.createElement('p');
+                scP.className = 'text-2xl text-indigo-900 bg-indigo-50 p-4 rounded-lg border border-indigo-100 en-font'; 
+                scP.textContent = s.scrambled;
+                body.appendChild(scP);
+            }
+
+            const footer = document.createElement('div');
+            footer.className = 'mt-6 flex flex-wrap items-center gap-3 border-t pt-4';
+
+            const showBtn = document.createElement('button');
+            showBtn.className = 'px-6 py-2 bg-slate-200 text-slate-800 rounded-lg text-lg font-bold hover:bg-slate-300 transition shadow-sm flex items-center gap-1.5 jp-font';
+            showBtn.innerHTML = '<span>👁️</span> 解答表示';
+            
+            const expBtn = document.createElement('button');
+            expBtn.className = 'px-6 py-2 bg-blue-50 text-blue-700 rounded-lg text-lg font-bold hover:bg-blue-100 transition border border-blue-200 shadow-sm flex items-center gap-1.5 jp-font';
+            expBtn.innerHTML = '<span>💡</span> 解説を表示';
+            
+            const expPanel = document.createElement('div');
+            expPanel.className = 'hidden w-full mt-3 p-5 bg-slate-50 rounded-lg text-xl text-slate-700 leading-relaxed border-l-4 border-slate-300 jp-font';
+            expPanel.innerHTML = `<strong>解説:</strong> ${s.explanation}`;
+
+            showBtn.onclick = () => { 
+                if (s.category === '1') {
+                    // 大問1の解答表示ロジック
+                    optButtons.forEach(btn => {
+                        btn.classList.remove('correct', 'incorrect');
+                        if (btn.textContent === s.answer) {
+                            btn.classList.add('correct');
+                        }
+                    });
+                    const ansPart = s.answer.split('. ')[1];
+                    qText.innerHTML = s.en.replace(ansPart, `<span class="highlight">${ansPart}</span>`);
+                } else if (input) {
+                    // 大問2〜4の解答表示ロジック
+                    input.value = s.en; 
+                    input.classList.add('correct'); 
+                    input.classList.remove('incorrect');
+                    feedback.classList.add('hidden');
+                }
+            };
+            expBtn.onclick = () => expPanel.classList.toggle('hidden');
+
+            footer.append(showBtn, expBtn);
+            body.append(footer, expPanel, micRes);
+            card.append(header, body);
+            return card;
+        }
+
+        function render() {
+            const containers = { '1': 'sentences-1', '2': 'sentences-2', '3': 'sentences-3', '4': 'sentences-4' };
+            const counts = { '1': 0, '2': 0, '3': 0, '4': 0 };
+            sentences.forEach(s => {
+                counts[s.category]++;
+                const container = document.getElementById(containers[s.category]);
+                if (container) {
+                    container.appendChild(createCard(s, counts[s.category]));
+                }
+            });
+        }
+        window.onload = render;
+    </script>
+</body>
+</html>
